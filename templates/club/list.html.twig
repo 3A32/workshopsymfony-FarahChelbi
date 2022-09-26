@@ -1,0 +1,22 @@
+<h1> la liste des formation </h1>
+{{ x }} dans la salle {{ y }}
+
+<table>
+<tr>
+<td>ref</td>
+<td>Titre</td>
+<td>Description</td>
+<td>nb_participants</td>
+</tr>
+
+{% for f in tabFormations %}
+<tr>
+<td>{{f.ref}}</td>
+<td>{{f.Titre}}</td>
+<td>{{f.Description}}</td>
+<td>{{f.nb_participants}}</td>
+</tr>
+{% endfor %}
+
+ 
+</table> 
