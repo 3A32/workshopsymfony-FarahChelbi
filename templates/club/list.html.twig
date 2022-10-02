@@ -1,22 +1,49 @@
+<img src="{{ asset('img/images.png') }}" alt="images">
+
+
 <h1> la liste des formation </h1>
 {{ x }} dans la salle {{ y }}
+<br></br>
+{% if tabFormations is empty %}
+<h1> Pas de formation </h1>
+{% else %}
+<table border ="1">
+    <tr>
+    <td>ref</td>
+    <td>Titre</td>
+    <td>Description</td>
+    <td>nb_participants</td>
+    <td>Participer</td>
+    </tr>
 
-<table>
-<tr>
-<td>ref</td>
-<td>Titre</td>
-<td>Description</td>
-<td>nb_participants</td>
-</tr>
+    {% for f in tabFormations %}
+    {% if f.Description == "theorique" %}
+    <tr>
+    <td>{{f.ref}}</td>
+    <td>{{f.Titre | upper}}</td>
+    <td>{{f.Description}}</td>
+    <td>{{f.nb_participants}}</td>
+    <td>
+    {% if f.nb_participants == 0 %}
+    <a href="{{ path('reservation_formation') }}"> Participer </a>
+    {% else %}
+    Solde out
+    {% endif %}
+   
 
-{% for f in tabFormations %}
-<tr>
-<td>{{f.ref}}</td>
-<td>{{f.Titre}}</td>
-<td>{{f.Description}}</td>
-<td>{{f.nb_participants}}</td>
-</tr>
-{% endfor %}
-
- 
+    
+    </td>
+    </tr>
+    {% else %}
+    {% endif %}
+    pas de formation theorique
+    
+   
+    {% endfor %}
+     
 </table> 
+{% endif %}
+<br></br>
+<h3> nombre de formartion:  {{tabFormations | length}} </h3>
+<h3> La formation ayant le plus grand nombre de participants est: {{ max }} </h3>
+<h3>Le nombre total des participants est: {{ nb_max }} </h3>
