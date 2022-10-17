@@ -3,17 +3,33 @@
 <h1>Liste des classrooms</h1>
 </center>
 
+
+<table border=1>
+
+<tr>
+
+<td>ID</td>
+<td>Classe</td>
+<td>Modifier</td>
+<td>Supprimer</td>
+
+</tr>
+
 {% for i in tabClassrooms %}
-<br>
-id:{{ i.id }}
-name:{{ i.name }}
+
+<tr>
+<td>id:{{ i.id }}</td>
+<td>name:{{ i.name }}</td>
     
-    <a href="{{ path('app_updateClassroom',{'id':i.id}) }}">Update</a>
-    <a href="{{ path('app_removeClassroom',{'id':i.id}) }}">Delete</a>
-    </br>
+    <td><a href="{{path('app_updateClassroom',{'id':i.id})}}">Update</a></td>
+    <td><a href="{{path('app_removeClassroom',{'id':i.id})}}">Delete</a></td>
+    
     
 {% endfor %}
+
+</table>
+
 <br></br>
 <h2>
-<a href="{{ path('app_addClassroom') }}">Ajouter Classe</a>
+<a href="{{path('app_addClassroom')}}">Ajouter Classe</a>
 </h2>

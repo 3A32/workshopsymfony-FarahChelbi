@@ -7,7 +7,8 @@ use App\Form\ClassroomType;
 use App\Repository\ClassroomRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+//use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,20 +32,20 @@ class ClassroomController extends AbstractController
     #[Route('/addClassroom', name: 'app_addClassroom')]
     public function addClassroom(ManagerRegistry $doctrine, Request $request)
     {
-        $classroom=new Classroom();
-        $form=$this->createForm(ClassroomType::class,$classroom);
+       
+        $class=new Classroom();
+        $form=$this->createForm(ClassroomType::class,$class);
         $form->handleRequest($request);
         if($form->isSubmitted())
         {
             $em=$doctrine->getManager();
-            $em->persist($classroom);
+            $em->persist($class);
             $em->flush();
             return $this->redirectToRoute("app_classroomList");
         }
-        return $this->renderForm("classroom/addClassroom.html.twig",
-         array("formClass"=>$form));
+        return $this->renderForm("classroom/addClassroom.html.twig", array("formClass"=>$form));
 
-         
+        
     }
 
     #[Route('/updateClassroom/{id}', name: 'app_updateClassroom')]
@@ -57,7 +58,7 @@ class ClassroomController extends AbstractController
         if ($form->isSubmitted()) { 
             $em=$doctrine->getManager();
             $em->flush();
-            return $this->redirectToRoute("app_ClassroomList");
+            return $this->redirectToRoute("app_classroomList");
         }
         return $this->renderForm("classroom/updateClassroom.html.twig",
         array("formClass"=>$form));
@@ -70,7 +71,7 @@ class ClassroomController extends AbstractController
         $em=$doctrine->getManager();
         $em->remove($classroom);
         $em->flush();
-        return $this->redirectToRoute("app_ClassroomList");
+        return $this->redirectToRoute("app_classroomList");
     }
 
 
